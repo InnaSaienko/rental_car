@@ -28,7 +28,7 @@
 
 }
 
-.primary:hover(:disabled), .secondary:hover(:disabled) {
+.primary:hover:not(:disabled), .secondary:hover:not(:disabled) {
     background: var(--dark-blue);
 }
 
