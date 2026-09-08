@@ -1,0 +1,17 @@
+.navList {
+    display: flex;
+    gap: 32px;
+}
+
+.navItem {
+    font-weight: 500;
+    line-height: 125%;
+
+    &.active {
+        color: var(--light-blue);
+        border-bottom: 2px solid var(--light-blue);
+    }
+
+}
+
+.navLink {}
