@@ -3,6 +3,7 @@ import {Manrope, Inter} from "next/font/google";
 import "./globals.css";
 import {ReactNode} from "react";
 import Header from "@/components/Header/page";
+import TanStackProvider from "@/TanStackProvider/TanStackProvider";
 
 const manrope = Manrope({
     variable: "--font-manrope",
@@ -30,8 +31,11 @@ export default function RootLayout({children}: Readonly<{ children: ReactNode }>
             className={`${manrope.variable} ${inter.variable}`}
         >
         <body>
-        <Header />
-        <main>{children}</main>
+        <TanStackProvider>
+            <Header />
+            <main>{children}</main>
+        </TanStackProvider>
+
         </body>
         </html>
     );
