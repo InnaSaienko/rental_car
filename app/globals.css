@@ -32,7 +32,7 @@ h4,
 h5,
 h6,
 p {
-    font-family: --font-inter, sans-serif;
+    font-family: --font-manrope, sans-serif;
     margin: 0;
 }
 
@@ -55,7 +55,5 @@ img {
 }
 
 .container {
-    width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
 }
