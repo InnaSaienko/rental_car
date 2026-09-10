@@ -12,19 +12,26 @@ const Card = ({car, priority}: CarCardProps) => {
     return (
         <div className={css.card}>
             <div className={css.cardContent}>
-                <Image className={css.image} src={car.img} alt={`Picture of ${car.brand} ${car.model} ${car.year}`}
+                <Image className={css.cardImage} src={car.img} alt={`Picture of ${car.brand} ${car.model} ${car.year}`}
                        width={244} height={268} priority={priority}/>
                 <div className={css.carDescription}>
                     <div className={css.carTitle}>
-                        <p className={css.carName}>${car.brand} <span className={css.model}>{car.model}</span>, ${car.year}</p>
-                        <p className={css.carPrice}>`${car.rentalPrice}`</p>
+                        <p className={css.carName}>{car.brand} <span className={css.model}>{car.model}</span>, {car.year}</p>
+                        <p className={css.carPrice}>${car.rentalPrice}</p>
                     </div>
                     <ul className={css.basicInfo}>
-                        <li className={css.item}>{car.location.city}</li>
-                        <li className={css.item}>{car.location.country}</li>
-                        <li className={css.item}>{car.rentalCompany}</li>
-                        <li className={css.item}>{car.type}</li>
-                        <li className={css.item}>{car.mileage}</li>
+                        <li className={css.infoGroup}>
+                            <span className={css.infoItem}>{car.location.city}</span>
+                            <svg className={css.separator}><use href="/sprite.svg#icon-vector" /></svg>
+                            <span className={css.infoItem}>{car.location.country}</span>
+                            <svg className={css.separator}><use href="/sprite.svg#icon-vector" /></svg>
+                            <span className={css.infoItem}>{car.rentalCompany}</span>
+                        </li>
+                        <li className={css.infoGroup}>
+                            <span className={css.infoItem}>{car.type}</span>
+                            <svg className={css.separator}><use href="/sprite.svg#icon-vector" /></svg>
+                            <span className={css.infoItem}>{car.mileage}</span>
+                        </li>
                     </ul>
                 </div>
             </div>

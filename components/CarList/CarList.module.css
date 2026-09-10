@@ -1,0 +1,8 @@
+.carList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(276px, 1fr));
+    row-gap: 48px;
+    column-gap: 32px;
+    margin: 0 auto;
+    justify-items: center;
+}
