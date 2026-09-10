@@ -10,7 +10,7 @@ export interface FetchCarsParams {
     maxMileage?: number,
 }
 
-export interface FetchCarResponse {
+export interface FetchCarsResponse {
     cars: Car[];
     totalCars: number;
     page: number;
@@ -27,11 +27,11 @@ const carApi = axios.create({
 
 
 
-export const fetchCars = async (params: FetchCarsParams): Promise<FetchCarResponse> => {
+export const fetchCars = async (params: FetchCarsParams): Promise<FetchCarsResponse> => {
     const requestParams = {
         page: params.page,
         perPage: params.perPage,
     };
-    const response: AxiosResponse<FetchCarResponse> = await carApi.get("/cars", {params: requestParams});
+    const response: AxiosResponse<FetchCarsResponse> = await carApi.get("/cars", {params: requestParams});
     return response.data;
 }
