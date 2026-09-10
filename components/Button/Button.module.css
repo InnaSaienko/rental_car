@@ -27,8 +27,11 @@
 }
 
 .loadMore {
+    display: block;
+    margin: 3rem auto;
     border: 1px solid var(--light-blue);
     background: transparent;
+    color: var(--main);
 
     &:hover:not(:disabled) {
         background: var(--dark-blue);
