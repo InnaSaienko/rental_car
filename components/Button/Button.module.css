@@ -34,7 +34,7 @@
     color: var(--main);
 
     &:hover:not(:disabled) {
-        background: var(--dark-blue);
+        border-color: var(--dark-blue);
     }
 }
 
