@@ -1,6 +1,7 @@
 import Button from "@/components/Button/Button";
 import Image from "next/image";
 import {Car} from "@/types/car";
+import css from "./CardCard.module.css";
 
 interface CarCardProps {
     car: Car;
@@ -9,22 +10,23 @@ interface CarCardProps {
 
 const Card = ({car, priority}: CarCardProps) => {
     return (
-        <div className="card">
-            <div className="card-image">
-                <Image src={car.img} alt={`Picture of ${car.brand} ${car.model} ${car.year}`} priority={priority}/>
-            </div>
-            <div className="card-content">
-                <div className="car-title">
-                    <p className="car-name">${car.brand} ${car.model} ${car.year}</p>
-                    <p className="car-price">${car.rentalPrice} $</p>
+        <div className={css.card}>
+            <div className={css.cardContent}>
+                <Image className={css.image} src={car.img} alt={`Picture of ${car.brand} ${car.model} ${car.year}`}
+                       width={244} height={268} priority={priority}/>
+                <div className={css.carDescription}>
+                    <div className={css.carTitle}>
+                        <p className={css.carName}>${car.brand} <span className={css.model}>{car.model}</span>, ${car.year}</p>
+                        <p className={css.carPrice}>`${car.rentalPrice}`</p>
+                    </div>
+                    <ul className={css.basicInfo}>
+                        <li className={css.item}>{car.location.city}</li>
+                        <li className={css.item}>{car.location.country}</li>
+                        <li className={css.item}>{car.rentalCompany}</li>
+                        <li className={css.item}>{car.type}</li>
+                        <li className={css.item}>{car.mileage}</li>
+                    </ul>
                 </div>
-                <ul className="car-description">
-                    <li className="item">{car.location.city}</li>
-                    <li className="item">{car.location.country}</li>
-                    <li className="item">{car.rentalCompany}</li>
-                    <li className="item">{car.type}</li>
-                    <li className="item">{car.mileage}</li>
-                </ul>
             </div>
             <Button variant="secondary">Read more</Button>
         </div>
