@@ -5,14 +5,15 @@ import {fetchCars} from "@/lib/api";
 import CarList from "@/components/CarList/CarList";
 import {FetchCarsResponse} from "@/lib/api";
 import Button from "@/components/Button/Button";
+import Loader from "@/components/Loader/Loader";
 
 export const catalogPerPage = 8;
 
 const CatalogClient = () => {
 
-    const {data, hasNextPage} = useInfiniteQuery<FetchCarsResponse>({
+    const {data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading} = useInfiniteQuery<FetchCarsResponse>({
         queryKey: ["cars"],
-        queryFn: ({}) => fetchCars({page: 1, perPage: catalogPerPage}),
+        queryFn: ({pageParam = 1}) => fetchCars({page: pageParam as number, perPage: catalogPerPage}),
         initialPageParam: 1,
         getNextPageParam: (lastPage) => lastPage.page < lastPage.totalPages ? lastPage.page + 1 : undefined,
         placeholderData: keepPreviousData,
@@ -24,16 +25,14 @@ const CatalogClient = () => {
 
     return (
         <>
+            {isLoading || isFetchingNextPage && <Loader/>}
             <CarList cars={allCars}/>
-            {hasNextPage && (
-                    <Button
-                        variant="loadMore"
-                        // onClick={() => fetchNextPage()}
-                        className="loadMore"
-                    >Load more
-                    </Button>
-                )
-            }
+
+            {hasNextPage && <Button
+                variant="loadMore"
+                onClick={() => fetchNextPage()}
+                className="loadMore"
+                disabled={isFetchingNextPage}>Load more</Button>}
         </>
     )
 }

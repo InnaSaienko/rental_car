@@ -2,6 +2,7 @@ import Button from "@/components/Button/Button";
 import Image from "next/image";
 import {Car} from "@/types/car";
 import css from "./CarCard.module.css";
+import {memo} from "react";
 
 interface CarCardProps {
     car: Car;
@@ -40,4 +41,4 @@ const Card = ({car, priority}: CarCardProps) => {
     )
 }
 
-export default Card;
+export default memo(Card);
