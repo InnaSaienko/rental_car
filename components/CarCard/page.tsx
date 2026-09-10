@@ -1,7 +1,7 @@
 import Button from "@/components/Button/Button";
 import Image from "next/image";
 import {Car} from "@/types/car";
-import css from "./CardCard.module.css";
+import css from "./CarCard.module.css";
 
 interface CarCardProps {
     car: Car;
