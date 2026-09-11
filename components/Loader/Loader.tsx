@@ -7,7 +7,9 @@ const Loader = () => {
             <div className={css.loaderBackdrop}>
                 <div className={css.loader}>
                     <div className={css.spinner}>
-                        <span className={css.ellips}></span>
+                        <svg>
+                            <use href="/sprite.svg#icon-loader" width={102} height={102} />
+                        </svg>
                     </div>
                     <div className={css.loadingText}>
                         <p className={css.title}>Loading cars<span className={css.indicatorDots}>...</span></p>
