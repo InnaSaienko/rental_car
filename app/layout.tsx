@@ -1,9 +1,11 @@
 import type {Metadata} from "next";
+import 'modern-normalize';
 import {Manrope, Inter} from "next/font/google";
 import "./globals.css";
 import {ReactNode} from "react";
 import Header from "@/components/Header/page";
 import TanStackProvider from "@/TanStackProvider/TanStackProvider";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const manrope = Manrope({
     variable: "--font-manrope",
@@ -34,8 +36,8 @@ export default function RootLayout({children}: Readonly<{ children: ReactNode }>
         <TanStackProvider>
             <Header />
             <main>{children}</main>
+            <ReactQueryDevtools initialIsOpen={false} />
         </TanStackProvider>
-
         </body>
         </html>
     );

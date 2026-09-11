@@ -15,6 +15,16 @@
     --error-light: #ffdfdf;
 }
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: --font-manrope, sans-serif;;
     display: flex;
