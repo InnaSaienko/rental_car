@@ -17,6 +17,14 @@ export interface FetchCarsResponse {
     totalPages: number;
 }
 
+export interface CarFiltersResponse {
+    brands: string[];
+    price: {
+        min: number;
+        max: number;
+    };
+}
+
 // Base API configuration
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -25,13 +33,23 @@ const carApi = axios.create({
     }
 );
 
-
-
 export const fetchCars = async (params: FetchCarsParams): Promise<FetchCarsResponse> => {
+    const { page, perPage, brand, price, minMileage, maxMileage } = params;
+
     const requestParams = {
-        page: params.page,
-        perPage: params.perPage,
+        page,
+        perPage,
+        ...(brand && { brand }),
+        ...(price !== undefined && { price }),
+        ...(minMileage !== undefined && { minMileage }),
+        ...(maxMileage !== undefined && { maxMileage }),
+
     };
     const response: AxiosResponse<FetchCarsResponse> = await carApi.get("/cars", {params: requestParams});
+    return response.data;
+}
+
+export const fetchCarFilters = async(): Promise<CarFiltersResponse> => {
+    const response = await carApi.get("/cars/filters");
     return response.data;
 }

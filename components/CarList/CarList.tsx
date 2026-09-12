@@ -1,8 +1,9 @@
 "use client"
 
-import CarCard from "@/components/CarCard/page"
+
 import {Car} from "@/types/car"
 import css from "./CarList.module.css"
+import CarCard from "@/components/CarCard/CarCard";
 
 interface CarListProps {
     cars: Car[];

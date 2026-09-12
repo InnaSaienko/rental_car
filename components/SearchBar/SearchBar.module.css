@@ -1,0 +1,43 @@
+.searchForm {
+    /*position: relative;*/
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    gap: 16px;
+    margin-top: 84px;
+    margin-bottom: 60px;
+}
+
+.mileageDivider {
+    width: 1px;
+    height: 44px;
+    background-color: var(--gray-light);
+}
+
+.searchButtonContainer {
+    position: relative;
+}
+
+.clearButton {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    margin-top: 8px;
+    font-weight: 500;
+    color: var(--gray);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .clearButton {
+
+    }
+}
+
+.clearButton:hover {
+    color: var(--light-blue);
+}

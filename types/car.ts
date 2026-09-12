@@ -21,3 +21,10 @@ export interface Car {
     rentalConditions: string[];
     mileage: number;
 }
+
+export interface CarFilters {
+    brand?: string;
+    price?: number;
+    minMileage?: number;
+    maxMileage?: number;
+}

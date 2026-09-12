@@ -14,7 +14,7 @@ const Card = ({car, priority}: CarCardProps) => {
         <div className={css.card}>
             <div className={css.cardContent}>
                 <Image className={css.cardImage} src={car.img} alt={`Picture of ${car.brand} ${car.model} ${car.year}`}
-                       width={244} height={268} priority={priority}/>
+                       width={244} height={268} priority={priority} loading={"eager"}/>
                 <div className={css.carDescription}>
                     <div className={css.carTitle}>
                         <p className={css.carName}>{car.brand} <span className={css.model}>{car.model}</span>, {car.year}</p>
