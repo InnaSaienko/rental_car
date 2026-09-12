@@ -4,9 +4,9 @@ import {useState, type ChangeEvent, type SubmitEvent} from 'react';
 import {CarFiltersResponse} from "@/lib/api";
 import Button from "@/components/Button/Button";
 import css from "./SearchBar.module.css";
-import style from "../CustomSelect/CustomDropdown.module.css";
+import style from "@/components/CustomInput/CustomInput.module.css";
 import {CarFilters} from "@/types/car";
-import CustomDropdown from "@/components/CustomSelect/CustomDropdown";
+import CustomInput from "@/components/CustomInput/CustomInput";
 
 
 interface SearchBarProps {
@@ -68,7 +68,7 @@ const SearchBar = ({onFilter, filters}: SearchBarProps) => {
 
     return (
         <form className={css.searchForm} onSubmit={handleSubmit}>
-            <CustomDropdown
+            <CustomInput
                 label="Car brand"
                 value={brand}
                 options={brands}
@@ -82,7 +82,7 @@ const SearchBar = ({onFilter, filters}: SearchBarProps) => {
                 inputId="brand-dropdown"
             />
 
-            <CustomDropdown
+            <CustomInput
                 label="Price/1 hour"
                 value={price}
                 options={priceOptions}

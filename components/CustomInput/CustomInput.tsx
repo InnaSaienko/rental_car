@@ -1,4 +1,4 @@
-import css from "./CustomDropdown.module.css"
+import css from "./CustomInput.module.css"
 
 interface CustomDropdownProps {
     label: string;
@@ -11,7 +11,7 @@ interface CustomDropdownProps {
     inputId: string
 }
 
-const CustomDropdown = ({
+const CustomInput = ({
                             label,
                             value,
                             options,
@@ -62,4 +62,4 @@ const CustomDropdown = ({
             </div>
     </div>
 );
-export default CustomDropdown;
+export default CustomInput;

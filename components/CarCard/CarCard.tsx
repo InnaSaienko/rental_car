@@ -36,7 +36,7 @@ const Card = ({car, priority}: CarCardProps) => {
                     </ul>
                 </div>
             </div>
-            <Button variant="secondary">Read more</Button>
+            <Button variant="secondary" href={`/catalog/${car.id}`}>Read more</Button>
         </div>
     )
 }

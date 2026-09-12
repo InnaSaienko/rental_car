@@ -25,6 +25,15 @@ export interface CarFiltersResponse {
     };
 }
 
+export interface BookingFormPayload {
+    name: string;
+    email: string;
+    comment?: string;
+}
+
+interface BookingResponse {
+    maessage: string;
+}
 // Base API configuration
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -53,3 +62,18 @@ export const fetchCarFilters = async(): Promise<CarFiltersResponse> => {
     const response = await carApi.get("/cars/filters");
     return response.data;
 }
+
+export const fetchCarById = async (id: string): Promise<Car> => {
+    const response: AxiosResponse<Car> = await carApi.get(`/cars/${id}`);
+
+    return response.data;
+};
+
+export const createBooking = async (
+    carId: string,
+    payload: BookingFormPayload
+): Promise<BookingResponse> => {
+    const response: AxiosResponse<BookingResponse> = await carApi.post(`/cars/${carId}/booking-requests`, payload);
+
+    return response.data;
+};
