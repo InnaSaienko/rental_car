@@ -3,7 +3,7 @@ import 'modern-normalize';
 import {Manrope, Inter} from "next/font/google";
 import "./globals.css";
 import {ReactNode} from "react";
-import Header from "@/components/Header/page";
+import Header from "@/components/Header/Header";
 import TanStackProvider from "@/TanStackProvider/TanStackProvider";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 

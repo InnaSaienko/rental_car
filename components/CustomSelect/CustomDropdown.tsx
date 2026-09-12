@@ -8,7 +8,7 @@ interface CustomDropdownProps {
     onSelect: (value: string) => void;
     isOpen: boolean;
     onToggle: () => void;
-    closeOtherDropdowns: () => void;
+    inputId: string
 }
 
 const CustomDropdown = ({
@@ -19,52 +19,47 @@ const CustomDropdown = ({
                             onSelect,
                             isOpen,
                             onToggle,
-                            closeOtherDropdowns
+    inputId
                         }: CustomDropdownProps) => (
     <div className={css.filterGroup}>
-        <label className={css.field}>
+        <label className={css.field} htmlFor={inputId}>
             <span className={css.label}>{label}</span>
-            <span className={css.dropDownWrapper}>
-                <span className={css.dropDownInputWrapper}>
+        </label>
+        <div className={css.dropDownWrapper}>
+                <div className={css.dropDownInputWrapper}>
                     <input
                         className={css.dropDownInput}
                         type="text"
                         value={value}
                         placeholder={placeholder}
                         readOnly
-                        onClick={() => {
-                            onToggle();
-                            closeOtherDropdowns();
-                        }}
+                        onClick={onToggle}
                     />
                     {isOpen ? (
                         <svg className={css.dropDownIcon} aria-hidden="true">
-                            <use href="/sprite.svg#icon-arrow-up" />
+                            <use href="/sprite.svg#icon-arrow-up"/>
                         </svg>
                     ) : (
                         <svg className={css.dropDownIcon} aria-hidden="true">
-                            <use href="/sprite.svg#icon-arrow-down" />
+                            <use href="/sprite.svg#icon-arrow-down"/>
                         </svg>
                     )}
-                </span>
-                {isOpen && (
-                    <ul className={css.dropDown}>
-                        {options.map((option) => (
-                            <li
-                                key={option}
-                                className={`${css.dropDownItem} ${option.toString() === value ? css.dropDownInputSelected : ''}`}
-                                onClick={() => {
-                                    onSelect(option.toString());
-                                    onToggle();
-                                }}
-                            >
-                                {option}
-                            </li>
-                        ))}
-                    </ul>
-                )}
-            </span>
-        </label>
+                </div>
+            {isOpen && (
+                <ul className={css.dropDown}>
+                    {options.map((option) => (
+                        <li
+                            key={option}
+                            className={`${css.dropDownItem} ${option.toString() === value ? css.dropDownInputSelected : ''}`}
+                            onClick={() => {
+                                onSelect(option.toString());
+                            }}
+                        >{option}
+                        </li>
+                    ))}
+                </ul>
+            )}
+            </div>
     </div>
 );
 export default CustomDropdown;

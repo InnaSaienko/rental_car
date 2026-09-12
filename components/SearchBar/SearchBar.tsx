@@ -23,10 +23,15 @@ const SearchBar = ({onFilter, filters}: SearchBarProps) => {
     const [mileageFrom, setMileageFrom] = useState<string>('');
     const [mileageTo, setMileageTo] = useState<string>('');
 
-    const [isBrandDropdownOpen, setIsBrandDropdownOpen] = useState(false);
-    const [isPriceDropdownOpen, setIsPriceDropdownOpen] = useState(false);
+    const [openDropdown, setOpenDropdown] = useState<"brand" | "price" | null>(null);
+    const toggleDropdown = (dropdown: "brand" | "price") => {
+        setOpenDropdown(current => current === dropdown ? null : dropdown);
+    };
+    const closeDropdowns = () => {
+        setOpenDropdown(null);
+    };
 
-
+    const hasActiveFilters = brand || price || mileageFrom || mileageTo;
     const brands = filters?.brands || [];
     const minPrice = filters?.price?.min || 0;
     const maxPrice = filters?.price?.max || 0;
@@ -57,6 +62,7 @@ const SearchBar = ({onFilter, filters}: SearchBarProps) => {
         setPrice("");
         setMileageFrom("");
         setMileageTo("");
+        setOpenDropdown(null);
         onFilter(DEFAULT_FILTERS);
     };
 
@@ -67,10 +73,13 @@ const SearchBar = ({onFilter, filters}: SearchBarProps) => {
                 value={brand}
                 options={brands}
                 placeholder="Choose a brand"
-                onSelect={setBrand}
-                isOpen={isBrandDropdownOpen}
-                onToggle={() => setIsBrandDropdownOpen(!isBrandDropdownOpen)}
-                closeOtherDropdowns={() => setIsPriceDropdownOpen(false)}
+                onSelect={(value) => {
+                    setBrand(value);
+                    closeDropdowns();
+                }}
+                isOpen={openDropdown === "brand"}
+                onToggle={() => toggleDropdown("brand")}
+                inputId="brand-dropdown"
             />
 
             <CustomDropdown
@@ -78,10 +87,13 @@ const SearchBar = ({onFilter, filters}: SearchBarProps) => {
                 value={price}
                 options={priceOptions}
                 placeholder="Choose a price"
-                onSelect={setPrice}
-                isOpen={isPriceDropdownOpen}
-                onToggle={() => setIsPriceDropdownOpen(!isPriceDropdownOpen)}
-                closeOtherDropdowns={() => setIsBrandDropdownOpen(false)}
+                onSelect={(value) => {
+                    setPrice(value);
+                    closeDropdowns();
+                }}
+                isOpen={openDropdown === "price"}
+                onToggle={() => toggleDropdown("price")}
+                inputId="price-dropdown"
             />
 
             <div className={style.filterGroup}>
@@ -111,7 +123,12 @@ const SearchBar = ({onFilter, filters}: SearchBarProps) => {
             </div>
             <div className={css.searchButtonContainer}>
                 <Button variant="secondary" type="submit" className={css.searchButton}>Search</Button>
-                <button type="button" className={css.clearButton} onClick={handleClear}>
+                <button
+                    type="button"
+                    className={css.clearButton}
+                    onClick={handleClear}
+                    style={{ visibility: hasActiveFilters ? 'visible' : 'hidden' }}
+                >
                     Clear filters
                 </button>
             </div>

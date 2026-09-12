@@ -1,5 +1,5 @@
 import Link from "next/link";
-import NavBar from "@/components/NavBar/page";
+import NavBar from "@/components/NavBar/NavBar";
 import css from "./Header.module.css";
 
 const Header = () => {
