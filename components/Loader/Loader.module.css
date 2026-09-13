@@ -22,39 +22,25 @@
     border-radius: 16px;
     padding: 48px 96px;
     min-width: 351px;
-    /*width: 543px;*/
-    /*height: 288px;*/
     background-color: var(--white);
 }
 
 .spinner {
-    /*width: 100%;*/
     fill: var(--inputs);
-    /*position: relative;*/
-}
-
-.spinner svg {
-    width: 102px;  /* Match your viewBox */
+    position: relative;
+    width: 102px;
     height: 102px;
-    display: block;
 }
-/*.ellips {*/
-/*    position: absolute;*/
-/*    top: 50%;*/
-/*    left: 50%;*/
-/*    transform: translate(-50%, -50%);*/
-/*    width: 48px;*/
-/*    height: 48px;*/
-/*    border-radius: 100%;*/
-/*    fill: var(--light-blue);*/
-/*    animation: spin 1s linear infinite;*/
-/*}*/
 
-/*@keyframes spin {*/
-/*    from { transform: translate(-50%, -50%) rotate(0deg); }*/
-/*    to { transform: translate(-50%, -50%) rotate(360deg); }*/
-/*}*/
+.spinner {
+    animation: spin 4s linear infinite;
+}
 
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
 .loadingText {
     font-weight: 600;
     font-size: 24px;

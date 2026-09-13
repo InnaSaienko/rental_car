@@ -8,8 +8,6 @@
     padding: 16px;
     width: 276px;
     min-width: 0;
-    /*height: 464px;*/
-    /*min-width: 0;*/
 }
 
 .cardContent {
@@ -23,34 +21,23 @@
     aspect-ratio: 244 / 268;
     border-radius: 14px;
     background: var(--gray-light);
-    /*flex-shrink: 1;*/
-    /*overflow: hidden;*/
-    /*object-fit: cover;*/
-
 }
 
 .carDescription {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    width: 100%;
 }
 
 .carTitle {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /*width: 100%;*/
-    /*min-width: 0;*/
     font-weight: 500;
     font-size: 16px;
 }
-.carName {
-    /*flex: 1 1 auto;*/
-    /*min-width: 0;*/
-    /*overflow: hidden;*/
-    /*text-overflow: ellipsis;*/
-    /*white-space: nowrap;*/
-}
+
 
 
 .model {
@@ -82,6 +69,5 @@
 .separator {
     width: 1px;
     height: 16px;
-    /*fill: none;*/
     stroke: #DADDE1;
 }

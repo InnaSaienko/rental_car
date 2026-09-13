@@ -25,7 +25,7 @@ const Button = ({
 
     if (href) {
         return (
-            <Link className={baseClassName} href={href} {...restProps as AnchorHTMLAttributes<HTMLAnchorElement>}>
+            <Link className={baseClassName} href={href} {...restProps as AnchorHTMLAttributes<HTMLAnchorElement>}  target="_blank">
                 {children}
             </Link>
         );

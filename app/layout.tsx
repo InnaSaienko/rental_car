@@ -6,6 +6,7 @@ import {ReactNode} from "react";
 import Header from "@/components/Header/Header";
 import TanStackProvider from "@/TanStackProvider/TanStackProvider";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import {Toaster} from "react-hot-toast";
 
 const manrope = Manrope({
     variable: "--font-manrope",
@@ -37,6 +38,7 @@ export default function RootLayout({children}: Readonly<{ children: ReactNode }>
         <TanStackProvider>
             <Header />
             <main>{children}</main>
+            <Toaster/>
             <ReactQueryDevtools initialIsOpen={false} />
         </TanStackProvider>
         </body>

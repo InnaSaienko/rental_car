@@ -5,7 +5,7 @@
     align-items: center;
     max-width: 924px;
     margin: 0 auto;
-    padding: 12px 24px;
+    padding: 32px 24px;
     width: 100%;
 }
 
@@ -15,8 +15,9 @@
         flex-direction: row;
         align-items: end;
         column-gap: 16px;
-        row-gap: 24px;
+        row-gap: 14px;
         flex-wrap: wrap;
+        padding: 32px 24px;
 
         & > * {
             flex: 1 0 40%;
@@ -83,7 +84,7 @@
 .clearButton {
     position: absolute;
     top: 100%;
-    left: 50%;
+    left: 20%;
     transform: translateX(-50%);
     width: 100%;
     margin-top: 8px;
@@ -97,6 +98,15 @@
 @media (max-width: 768px) {
     .searchButtonContainer > button {
         width: 100%;
+    }
+    .clearButton {
+        left: 10%;
+    }
+}
+
+@media (max-width: 1440px) {
+    .clearButton {
+        left: 10%;
     }
 }
 

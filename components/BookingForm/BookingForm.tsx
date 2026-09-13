@@ -7,6 +7,8 @@ import css from "./BookingForm.module.css";
 import style from "../CustomInput/CustomInput.module.css";
 import {type BookingFormPayload, createBooking} from "@/lib/api";
 import Button from "@/components/Button/Button";
+import { useToaster } from '@/hooks/useToaster';
+import { useRouter } from 'next/navigation';
 
 
 interface BookingFormProps {
@@ -24,6 +26,8 @@ const BookingForm = ({carId}: BookingFormProps) => {
     const [email, setEmail] = useState<string>('');
     const [comment, setComment] = useState<string>('');
     const [errors, setErrors] = useState<FormErrors>({});
+    const { showSuccess, showError } = useToaster();
+    const router = useRouter();
 
     const isValidField = (value: string) => {
         return value.trim() !== '';
@@ -31,15 +35,18 @@ const BookingForm = ({carId}: BookingFormProps) => {
 
     const bookingMutation = useMutation({
         mutationFn: (payload: BookingFormPayload) => createBooking(carId, payload),
-        onSuccess: data => {
+        onSuccess: () => {
             setName('');
             setEmail('');
             setComment('');
+            showSuccess('Booking request sent successfully!');
+            setTimeout(() => router.push('/catalog'), 2000);
         },
         onError: mutationError => {
             const message = axios.isAxiosError(mutationError)
                 ? (mutationError.response?.data?.message ?? 'Could not send your request.')
                 : 'Could not send your booking request.';
+            showError(message);
         },
     });
 

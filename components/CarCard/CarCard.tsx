@@ -10,6 +10,11 @@ interface CarCardProps {
 }
 
 const Card = ({car, priority}: CarCardProps) => {
+    const getModelName = (model: string) => {
+        const lastWord = model.trim().split(" ").at(-1) ?? "";
+        return lastWord.split("-")[0];
+    };
+
     return (
         <div className={css.card}>
             <div className={css.cardContent}>
@@ -17,7 +22,7 @@ const Card = ({car, priority}: CarCardProps) => {
                        width={244} height={268} priority={priority} loading={"eager"}/>
                 <div className={css.carDescription}>
                     <div className={css.carTitle}>
-                        <p className={css.carName}>{car.brand} <span className={css.model}>{car.model}</span>, {car.year}</p>
+                        <p className={css.carName}>{car.brand} <span className={css.model}>{getModelName(car.model)}</span>, {car.year}</p>
                         <p className={css.carPrice}>${car.rentalPrice}</p>
                     </div>
                     <ul className={css.basicInfo}>
