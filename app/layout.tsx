@@ -31,6 +31,7 @@ export default function RootLayout({children}: Readonly<{ children: ReactNode }>
         <html
             lang="en"
             className={`${manrope.variable} ${inter.variable}`}
+            data-scroll-behavior="smooth"
         >
         <body>
         <TanStackProvider>

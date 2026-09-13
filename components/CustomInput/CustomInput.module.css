@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    width: 100%;
 }
 
 .field {
@@ -27,6 +28,7 @@
 }
 
 .dropDownInput {
+    width: 100%;
     border-radius: 12px;
     padding: 12px 16px;
     font-weight: 500;
@@ -40,6 +42,12 @@
 }
 
 @media (min-width: 768px) {
+    .dropDownInput {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1440px) {
     .dropDownInput {
         width: 204px;
     }

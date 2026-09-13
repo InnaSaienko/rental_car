@@ -5,10 +5,10 @@ import { notFound, useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import BookingForm from '@/components/BookingForm/BookingForm';
-// import CarInfo from '@/components/CarInfo/CarInfo';
 import Loader from '@/components/Loader/Loader';
 import { fetchCarById } from '@/lib/api';
 import css from './CarDetails.module.css';
+import CarDetailsInfo from "@/components/CarDetailsInfo/CarDetailsInfo";
 
 export default function CarDetailsClient() {
     const { id } = useParams<{ id: string }>();
@@ -31,8 +31,8 @@ export default function CarDetailsClient() {
     }
 
     return (
-        <div className={css.layout}>
-            <div className={css.left}>
+        <div className={css.carLayout}>
+            <div className={css.carLayoutLeft}>
                 <div className={css.imageWrapper}>
                     <Image
                         className={css.image}
@@ -43,11 +43,10 @@ export default function CarDetailsClient() {
                         priority
                     />
                 </div>
-
                 <BookingForm carId={id} />
             </div>
 
-            {/*<CarInfo car={car} />*/}
+            <CarDetailsInfo car={car} />
         </div>
     );
 }

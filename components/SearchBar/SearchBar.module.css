@@ -1,21 +1,83 @@
 .searchForm {
-    /*position: relative;*/
     display: flex;
-    justify-content: center;
-    align-items: end;
-    gap: 16px;
-    margin-top: 84px;
-    margin-bottom: 60px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 924px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    width: 100%;
 }
+
+@media (min-width: 768px) {
+    .searchForm {
+        display: flex;
+        flex-direction: row;
+        align-items: end;
+        column-gap: 16px;
+        row-gap: 24px;
+        flex-wrap: wrap;
+
+        & > * {
+            flex: 1 0 40%;
+            min-width: 0;
+        }
+    }
+
+    .dropDownInput {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1440px) {
+    .searchForm {
+        flex-direction: row;
+        gap: 16px;
+        flex-wrap: nowrap;
+        padding: 84px 24px;
+
+        & > * {
+            flex: auto;
+            min-width: 0;
+        }
+    }
+}
+
+
+.mileageRange {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.mileageInput {
+    border-radius: 0 !important;
+}
+
+@media (min-width: 768px) {
+    .mileageInput {
+        /*max-width: 160px;*/
+    }
+    .mileageRange {
+        margin-bottom: 0;
+    }
+}
+
 
 .mileageDivider {
     width: 1px;
     height: 44px;
     background-color: var(--gray-light);
+    z-index: 1;
 }
 
 .searchButtonContainer {
     position: relative;
+    width: 100%;
+    margin-top: 16px;
 }
 
 .clearButton {
@@ -32,9 +94,9 @@
     cursor: pointer;
 }
 
-@media (min-width: 768px) {
-    .clearButton {
-
+@media (max-width: 768px) {
+    .searchButtonContainer > button {
+        width: 100%;
     }
 }
 

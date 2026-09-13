@@ -65,6 +65,7 @@ export const fetchCarFilters = async(): Promise<CarFiltersResponse> => {
 
 export const fetchCarById = async (id: string): Promise<Car> => {
     const response: AxiosResponse<Car> = await carApi.get(`/cars/${id}`);
+    console.log("Response by ID: ", response);
 
     return response.data;
 };

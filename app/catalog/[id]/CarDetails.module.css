@@ -1,0 +1,30 @@
+.carLayout {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+    margin: 0 auto;
+    margin-top: 84px;
+    margin-bottom: 84px;
+    max-width: 1280px;
+    padding-inline: 16px;
+}
+
+@media (min-width: 768px) {
+    .carLayout {
+        flex-direction: row;
+        padding: 0 24px;
+    }
+}
+
+.carLayoutLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.imageWrapper {
+    border-radius: 16px;
+}

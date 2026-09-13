@@ -12,7 +12,7 @@ export interface Car {
     type: string;
     img: string;
     description: string;
-    fuelConsumption: string;
+    fuelConsumption:  number;
     engine: string;
     features: string[];
     rentalPrice: string;
@@ -20,6 +20,9 @@ export interface Car {
     location: Location;
     rentalConditions: string[];
     mileage: number;
+    stockNumber: number;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export interface CarFilters {

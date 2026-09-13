@@ -101,7 +101,7 @@ const SearchBar = ({onFilter, filters}: SearchBarProps) => {
                 <div className={css.mileageRange}>
                     <input
                         name="minMileage"
-                        className={style.dropDownInput}
+                        className={`${style.dropDownInput} ${css.mileageInput}`}
                         value={mileageFrom}
                         aria-label="Mileage from, km"
                         type="number"
@@ -111,7 +111,7 @@ const SearchBar = ({onFilter, filters}: SearchBarProps) => {
                     <span className={css.mileageDivider} aria-hidden="true" />
                     <input
                         name="maxMileage"
-                        className={style.dropDownInput}
+                        className={`${style.dropDownInput} ${css.mileageInput}`}
                         value={mileageTo}
                         aria-label="Mileage to, km"
                         type="number"

@@ -1,7 +1,7 @@
 .hero {
     position: relative;
     width: 100%;
-    min-height: clamp(420px, 70vw, 700px);
+    /*min-height: clamp(420px, 70vw, 700px);*/
 }
 
 .titleWrapper {
@@ -16,19 +16,47 @@
 
 .title {
     font-weight: 700;
-    font-size: 3.75rem;
+    font-size: 2rem;
 }
+
+@media screen and (min-width: 768px) {
+    .title {
+        font-size: 2.75rem;
+    }
+    .description {
+        margin-bottom: 1.3rem;
+        font-size: 1.25rem;
+        line-height: 1.45rem;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .title {
+        font-size: 3.75rem;
+    }
+
+    .description {
+        margin-bottom: 2.5rem;
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+}
+
 
 .description {
     margin-top: 1rem;
-    margin-bottom: 2.5rem;
-    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
     font-weight: 600;
-    line-height: 2rem;
+    line-height: 1.3rem;
 }
 
 
 & .heroImageWrapper {
     transform: translate(-50%, -50%);
     width: 100%;
+}
+
+.heroImage {
+    margin: 0 auto;
 }

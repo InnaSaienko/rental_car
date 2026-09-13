@@ -15,11 +15,13 @@
 }
 
 .primary {
-    padding: 12px 89px;
+    padding: 4px 6px;
 }
 
-.secondary {
-
+@media screen and (min-width: 768px) {
+    .primary {
+        padding: 12px 89px;
+    }
 }
 
 .primary:hover:not(:disabled), .secondary:hover:not(:disabled) {
