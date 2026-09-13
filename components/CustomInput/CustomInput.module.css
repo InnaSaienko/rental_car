@@ -5,6 +5,12 @@
     width: 100%;
 }
 
+@media (min-width: 1440px) {
+    .filterGroup {
+        width: auto;
+    }
+}
+
 .field {
     display: flex;
     flex-direction: column;

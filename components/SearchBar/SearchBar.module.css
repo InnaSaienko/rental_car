@@ -9,6 +9,24 @@
     width: 100%;
 }
 
+.mileageRange {
+    display: flex;
+    flex-direction: row;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.mileageInput {
+    border-radius: 0 !important;
+}
+
+@media (min-width: 1440px) {
+    .mileageInput {
+        width: 160px !important;
+    }
+}
+
 @media (min-width: 768px) {
     .searchForm {
         display: flex;
@@ -35,33 +53,16 @@
         flex-direction: row;
         gap: 16px;
         flex-wrap: nowrap;
-        padding: 84px 24px;
+        padding: 84px 0;
 
         & > * {
-            flex: auto;
-            min-width: 0;
+            flex: none;
         }
     }
 }
 
 
-.mileageRange {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    overflow: hidden;
-}
-
-.mileageInput {
-    border-radius: 0 !important;
-}
-
 @media (min-width: 768px) {
-    .mileageInput {
-        /*max-width: 160px;*/
-    }
     .mileageRange {
         margin-bottom: 0;
     }
@@ -79,12 +80,23 @@
     position: relative;
     width: 100%;
     margin-top: 16px;
+
+    & button {
+        width: 100%;
+    }
 }
+
+@media (min-width: 1440px) {
+    .searchButtonContainer {
+        width: auto;
+    }
+}
+
 
 .clearButton {
     position: absolute;
     top: 100%;
-    left: 20%;
+    left: 6%;
     transform: translateX(-50%);
     width: 100%;
     margin-top: 8px;
@@ -95,18 +107,15 @@
     cursor: pointer;
 }
 
-@media (max-width: 768px) {
-    .searchButtonContainer > button {
-        width: 100%;
-    }
+@media (min-width: 768px) {
     .clearButton {
         left: 10%;
     }
 }
 
-@media (max-width: 1440px) {
+@media (min-width: 1440px) {
     .clearButton {
-        left: 10%;
+        left: 28%;
     }
 }
 

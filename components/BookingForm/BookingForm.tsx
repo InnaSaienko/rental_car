@@ -1,6 +1,6 @@
 "use client"
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useMutation} from "@tanstack/react-query";
 import axios from "axios";
 import css from "./BookingForm.module.css";
@@ -9,6 +9,7 @@ import {type BookingFormPayload, createBooking} from "@/lib/api";
 import Button from "@/components/Button/Button";
 import { useToaster } from '@/hooks/useToaster';
 import { useRouter } from 'next/navigation';
+import {useBookingFormStore} from "@/lib/store/bookingFormStore";
 
 
 interface BookingFormProps {
@@ -22,9 +23,11 @@ interface FormErrors {
 }
 
 const BookingForm = ({carId}: BookingFormProps) => {
-    const [name, setName] = useState<string>('');
-    const [email, setEmail] = useState<string>('');
-    const [comment, setComment] = useState<string>('');
+    const currentCarId = useBookingFormStore(state => state.currentCarId);
+    const setCarId = useBookingFormStore(state => state.setCarId);
+    const draft = useBookingFormStore(state => state.draft);
+    const setDraft = useBookingFormStore(state => state.setDraft);
+    const clearDraft = useBookingFormStore(state => state.clearDraft);
     const [errors, setErrors] = useState<FormErrors>({});
     const { showSuccess, showError } = useToaster();
     const router = useRouter();
@@ -33,12 +36,14 @@ const BookingForm = ({carId}: BookingFormProps) => {
         return value.trim() !== '';
     };
 
+    useEffect(() => {
+        setCarId(carId);
+    }, [carId, setCarId]);
+
     const bookingMutation = useMutation({
-        mutationFn: (payload: BookingFormPayload) => createBooking(carId, payload),
+        mutationFn: (payload: BookingFormPayload) => createBooking(currentCarId || carId, payload),
         onSuccess: () => {
-            setName('');
-            setEmail('');
-            setComment('');
+            clearDraft();
             showSuccess('Booking request sent successfully!');
             setTimeout(() => router.push('/catalog'), 2000);
         },
@@ -55,37 +60,25 @@ const BookingForm = ({carId}: BookingFormProps) => {
 
         const newErrors: FormErrors = {};
 
-        if (!isValidField(name)) {
-            newErrors.name = "Name is required";
-        }
-
-        if (!isValidField(email)) {
-            newErrors.email = "Email is required";
-        }
-
-        if (!isValidField(comment)) {
-            newErrors.comment = "Comment is required";
-        }
+        if (!isValidField(draft.name)) newErrors.name = "Name is required";
+        if (!isValidField(draft.email)) newErrors.email = "Email is required";
+        if (!isValidField(draft.comment)) newErrors.comment = "Comment is required";
 
         setErrors(newErrors);
-        console.log("New errors", newErrors);
 
-        if (Object.keys(newErrors).length > 0) {
-            return;
-        }
+        if (Object.keys(newErrors).length > 0) return;
 
         bookingMutation.mutate({
-            name: name.trim(),
-            email: email.trim(),
-            comment: comment.trim(),
+            name: draft.name.trim(),
+            email: draft.email.trim(),
+            comment: draft.comment.trim(),
         });
     };
 
-    const handleInputChange =
-        (setter: (value: string) => void) =>
-            (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-                setter(event.target.value);
-            };
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setDraft({ [name]: value });
+    };
 
     return (
         <div className={css.bookingForm}>
@@ -99,8 +92,9 @@ const BookingForm = ({carId}: BookingFormProps) => {
                             id="name"
                             className={`${css.input} ${errors.name ? css.inputError : ""}`}
                             type="text"
-                            value={name}
-                            onChange={handleInputChange(setName)}
+                            value={draft.name}
+                            name="name"
+                            onChange={handleInputChange}
                             placeholder="Enter your name"
                         />
                         {errors.name && (
@@ -120,8 +114,9 @@ const BookingForm = ({carId}: BookingFormProps) => {
                             id="email"
                             className={`${css.input} ${errors.email ? css.inputError : ""}`}
                             type="email"
-                            value={email}
-                            onChange={handleInputChange(setEmail)}
+                            value={draft.email}
+                            name="email"
+                            onChange={handleInputChange}
                             placeholder="Enter your email"
                         />
                         {errors.email && (
@@ -138,8 +133,9 @@ const BookingForm = ({carId}: BookingFormProps) => {
                     <div className={css.inputWrapper}><textarea
                         id="booking-comment"
                         className={`${css.textarea} ${errors.comment ? css.inputError : ""}`}
-                        value={comment}
-                        onChange={handleInputChange(setComment)}
+                        value={draft.comment}
+                        name="comment"
+                        onChange={handleInputChange}
                         placeholder="Any special requests?"
                         rows={4}
                     >
