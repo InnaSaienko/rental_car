@@ -8,11 +8,10 @@ interface BookingFormData {
 }
 
 interface BookingFormStore {
-    draft: BookingFormData;
-    currentCarId: string | null;
-    setDraft: (partialDraft: Partial<BookingFormData>) => void;
-    setCarId: (carId: string) => void;
-    clearDraft: () => void;
+    drafts: Record<string, BookingFormData>;
+    setDraft: (carId: string, partialDraft: Partial<BookingFormData>) => void;
+    getDraft: (carId: string) => BookingFormData;
+    clearDraft: (carId: string) => void;
 }
 
 const initialDraft: BookingFormData = {
@@ -22,22 +21,32 @@ const initialDraft: BookingFormData = {
 };
 export const useBookingFormStore = create<BookingFormStore>()(
     persist(
-        (set) => ({
-            draft: initialDraft,
-            currentCarId: null,
-            setDraft: (partialDraft) => {
+        (set, get) => ({
+            drafts: {},
+            setDraft: (carId, partialDraft) => {
                 set((state) => ({
-                    draft: { ...state.draft, ...partialDraft }
+                    drafts: {
+                        ...state.drafts,
+                        [carId]: { ...state.drafts[carId], ...partialDraft }
+                    }
                 }));
             },
-            setCarId: (carId) => set({ currentCarId: carId }),
-            clearDraft: () => set({ draft: initialDraft }),
+            getDraft: (carId) => {
+                const state = get();
+                return state.drafts[carId] || initialDraft;
+            },
+            clearDraft: (carId) => {
+                set((state) => {
+                    const newDrafts = { ...state.drafts };
+                    delete newDrafts[carId];
+                    return { drafts: newDrafts };
+                });
+            },
         }),
         {
             name: 'booking-form-storage',
             partialize: (state) => ({
-                draft: state.draft,
-                currentCarId: state.currentCarId
+                drafts: state.drafts,
             }),
         }
     )
