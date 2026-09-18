@@ -1,5 +1,32 @@
 import css from "./Home.module.css";
 import Button from "@/components/Button/Button";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Rental Car - Find Your Perfect Rental",
+    description: "Reliable and budget-friendly rentals for any journey. Browse our catalog and book your perfect car today.",
+    openGraph: {
+        title: "Rental Car - Find Your Perfect Rental",
+        description: "Reliable and budget-friendly rentals for any journey. Browse our catalog and book your perfect car today.",
+        url: process.env.NEXT_PUBLIC_WEBSITE_VERCEL_URL || "https://rental-car.vercel.app",
+        siteName: "Rental Car",
+        type: "website",
+        images: [
+            {
+                url: "/images/Hero.png",
+                width: 1200,
+                height: 630,
+                alt: "Rental Car - Find Your Perfect Rental",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Rental Car - Find Your Perfect Rental",
+        description: "Reliable and budget-friendly rentals for any journey. Browse our catalog and book your perfect car today.",
+        images: ["/images/Hero.png"],
+    },
+};
 
 export default function Home() {
   return (
