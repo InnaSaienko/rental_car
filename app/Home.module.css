@@ -1,6 +1,6 @@
 .hero {
     position: relative;
-    width: 100%;
+    width: 100%
     /*min-height: clamp(420px, 70vw, 700px);*/
 }
 
@@ -59,4 +59,6 @@
 
 .heroImage {
     margin: 0 auto;
+    width: 100%;
+    min-height: calc(100vh - 100px);
 }

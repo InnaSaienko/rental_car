@@ -1,28 +1,49 @@
 .carDetailRight {
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    width: 528px;
+    justify-content: space-between;
+    gap: 68px;
+    width: 100%;
     max-width: 100%;
     padding: 32px 24px;
     background: var(--white);
     border-radius: 16px;
 }
+@media (min-width: 768px) {
+    .carDetailRight {
+        padding: 32px 24px;
+        max-width: 528px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .carDetailRight {
+        padding: 32px 24px;
+
+    }
+}
 
 .header {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 32px;
 }
 
 .titleRow {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+        "title stock"
+        "location location"
+        "price price";
+    gap: 8px;
     align-items: baseline;
-    flex-wrap: wrap;
-    gap: 16px;
 }
 
 .title {
+    grid-area: title;
+    margin: 0;
     font-weight: 600;
     font-size: 24px;
     line-height: 133%;
@@ -34,11 +55,12 @@
     font-size: 16px;
     line-height: 125%;
     color: var(--gray);
+    grid-area: stock;
+    justify-self: end;
 }
 
 .location {
-    display: flex;
-    align-items: center;
+    grid-area: location;
     gap: 4px;
     font-weight: 500;
     font-size: 16px;
@@ -47,6 +69,7 @@
 }
 
 .price {
+    grid-area: price;
     font-weight: 600;
     font-size: 24px;
     line-height: 133%;
@@ -58,6 +81,8 @@
     font-size: 16px;
     line-height: 125%;
     color: var(--main);
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .details {

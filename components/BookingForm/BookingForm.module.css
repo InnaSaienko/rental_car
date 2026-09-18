@@ -68,3 +68,16 @@
     font-size: 12px;
     line-height: 133%;
 }
+
+.errorMessageTop {
+    position: absolute;    top: -15%;
+    left: 2%;
+    height: fit-content;
+    padding: 0 8px;
+    background-color: var(--error-light);
+    border-radius: 8px;
+}
+.supError {
+    font-size: 139%;
+    top: -0.02rem
+}

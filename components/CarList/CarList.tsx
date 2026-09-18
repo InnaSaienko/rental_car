@@ -11,7 +11,7 @@ interface CarListProps {
 
 const CarList = ({cars}: CarListProps) => {
     return (
-        <div className={`container ${css.carList}`}>
+        <ul className={`container ${css.carList}`}>
             {cars.map((car, index) => (
                 <CarCard 
                     key={car.id} 
@@ -19,7 +19,7 @@ const CarList = ({cars}: CarListProps) => {
                     priority={index < 4}
                 />
             ))}
-        </div>
+        </ul>
     )
 }
 

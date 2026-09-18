@@ -16,7 +16,7 @@ const Card = ({car, priority}: CarCardProps) => {
     };
 
     return (
-        <div className={css.card}>
+        <li className={css.card}>
             <div className={css.cardContent}>
                 <Image className={css.cardImage} src={car.img} alt={`Picture of ${car.brand} ${car.model} ${car.year}`}
                        width={244} height={268} priority={priority} loading={"eager"}/>
@@ -42,7 +42,7 @@ const Card = ({car, priority}: CarCardProps) => {
                 </div>
             </div>
             <Button variant="secondary" href={`/catalog/${car.id}`}>Read more</Button>
-        </div>
+        </li>
     )
 }
 

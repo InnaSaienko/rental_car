@@ -1,16 +1,16 @@
 "use client"
 
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useMutation} from "@tanstack/react-query";
 import axios from "axios";
 import css from "./BookingForm.module.css";
 import style from "../CustomInput/CustomInput.module.css";
 import {type BookingFormPayload, createBooking} from "@/lib/api";
 import Button from "@/components/Button/Button";
-import { useToaster } from '@/hooks/useToaster';
-import { useRouter } from 'next/navigation';
+import {useToaster} from '@/hooks/useToaster';
+import {useRouter} from 'next/navigation';
 import {useBookingFormStore} from "@/lib/store/bookingFormStore";
-import { isValidField, isValidName, isValidEmail } from '@/lib/utils/validation';
+import {isValidField, isValidName, isValidEmail} from '@/lib/utils/validation';
 
 
 interface BookingFormProps {
@@ -25,11 +25,11 @@ interface FormErrors {
 
 const BookingForm = ({carId}: BookingFormProps) => {
     const drafts = useBookingFormStore(state => state.drafts);
-    const draft = drafts[carId] || { name: '', email: '', comment: '' };
+    const draft = drafts[carId] || {name: '', email: '', comment: ''};
     const setDraft = useBookingFormStore(state => state.setDraft);
     const clearDraft = useBookingFormStore(state => state.clearDraft);
     const [errors, setErrors] = useState<FormErrors>({});
-    const { showSuccess, showError } = useToaster();
+    const {showSuccess, showError} = useToaster();
     const router = useRouter();
 
 
@@ -47,32 +47,26 @@ const BookingForm = ({carId}: BookingFormProps) => {
             showError(message);
         },
     });
-    useEffect(() => {
-        console.log('Current draft:', draft);
-    }, [draft]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
         const newErrors: FormErrors = {};
 
-        // Name validation
         if (!isValidField(draft.name)) {
             newErrors.name = "Name is required";
         } else if (!isValidName(draft.name)) {
             newErrors.name = "Name should contain only letters";
         }
 
-        // Email validation
         if (!isValidField(draft.email)) {
             newErrors.email = "Email is required";
         } else if (!isValidEmail(draft.email)) {
             newErrors.email = "Please enter your email";
         }
 
-        // Comment validation
-        if (!isValidField(draft.comment)) {
-            newErrors.comment = "Comment is required";
+        if (draft.comment && !isValidField(draft.comment)) {
+            newErrors.comment = "Comment cannot be empty";
         }
 
         setErrors(newErrors);
@@ -85,13 +79,9 @@ const BookingForm = ({carId}: BookingFormProps) => {
             comment: draft.comment.trim(),
         });
     };
-    useEffect(() => {
-        console.log('Errors updated:', errors);
-    }, [errors]);
-
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setDraft(carId, { [name]: value });
+        const {name, value} = e.target;
+        setDraft(carId, {[name]: value});
     };
 
     return (
@@ -109,17 +99,18 @@ const BookingForm = ({carId}: BookingFormProps) => {
                             value={draft.name}
                             name="name"
                             onChange={handleInputChange}
-                            placeholder="Enter your name"
+                            placeholder="Name"
                         />
                         {errors.name && (
                             <>
+                                <span className={`${css.errorMessage} ${css.errorMessageTop}`}>Name<sup className={css.supError}>*</sup></span>
                                 <svg className={css.errorIcon} aria-hidden="true">
                                     <use href="/sprite.svg#icon-error"/>
                                 </svg>
                                 <span className={css.errorMessage}>{errors.name}</span>
                             </>
-
-                        )} </div>
+                        )}
+                    </div>
                 </div>
                 <div className={style.filterGroup}>
                     <label className={style.label} htmlFor="email">Email</label>
@@ -131,10 +122,11 @@ const BookingForm = ({carId}: BookingFormProps) => {
                             value={draft.email}
                             name="email"
                             onChange={handleInputChange}
-                            placeholder="Enter your email"
+                            placeholder="Email"
                         />
                         {errors.email && (
                             <>
+                                <span className={`${css.errorMessage} ${css.errorMessageTop}`}>Email<sup className={css.supError}>*</sup></span>
                                 <svg className={css.errorIcon} aria-hidden="true">
                                     <use href="/sprite.svg#icon-error"/>
                                 </svg>
@@ -151,7 +143,7 @@ const BookingForm = ({carId}: BookingFormProps) => {
         value={draft.comment}
         name="comment"
         onChange={handleInputChange}
-        placeholder="Any special requests?"
+        placeholder="Comment"
         rows={3}
     />
                         {errors.comment && (
@@ -165,7 +157,7 @@ const BookingForm = ({carId}: BookingFormProps) => {
                     </div>
                 </div>
                 <Button type="submit" variant="secondary" className={css.button} disabled={bookingMutation.isPending}>
-                    Book now
+                    Send
                 </Button>
             </form>
         </div>

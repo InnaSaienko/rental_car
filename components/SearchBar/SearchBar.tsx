@@ -54,7 +54,6 @@ const SearchBar = ({onFilter, filters}: SearchBarProps) => {
             minMileage: mileageFrom ? Number(mileageFrom) : undefined,
             maxMileage: mileageTo ? Number(mileageTo) : undefined,
         });
-        console.log("handleSubmit: ", brand, price, mileageFrom, mileageTo);
     };
 
     const handleClear = () => {

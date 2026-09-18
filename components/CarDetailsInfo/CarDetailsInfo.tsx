@@ -44,14 +44,12 @@ const CarInfo = ({ car }: CarInfoProps)=> {
                         {car.brand} {car.model}, {car.year}
                     </h1>
                     <span className={css.stockNumber}>{`Article ${car.stockNumber}`}</span>
+                    <p className={css.location}>
+                        <Icon name="icon-location" />
+                        {car.location.city}, {car.location.country}
+                    </p>
+                    <p className={css.price}>{`$${car.rentalPrice}`}</p>
                 </div>
-
-                <p className={css.location}>
-                    <Icon name="icon-location" />
-                    {car.location.city}, {car.location.country}
-                </p>
-
-                <p className={css.price}>{`$${car.rentalPrice}`}</p>
                 <p className={css.description}>{car.description}</p>
             </div>
 
